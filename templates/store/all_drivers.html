@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<main id="main">
+  <!-- ======= Breadcrumbs Section ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>All Drivers</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Drivers Section ======= -->
+  <section id="team" class="team section-bg">
+    <div class="container">
+      <div class="row">
+        {% for entry in drivers %}
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <div class="member-img">
+                <img src="{% static 'dabec/img/driver.jpg' %}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>{{ entry.driver.first_name }} {{ entry.driver.last_name }}</h4>
+                <p><strong>Daily Earnings:</strong> Ksh {{ entry.daily_earnings }}</p>
+                <p><strong>Total Earnings:</strong> Ksh {{ entry.total_earnings }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}

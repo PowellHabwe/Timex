@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main id="main">
+  <!-- Breadcrumb Section -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Ride Confirmation</h2>
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li>Confirm Ride</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+  
+        <div class="row gy-4">
+  
+          <div class="col-lg-4">
+  
+  
+            <div class="portfolio-info">
+              <h3>{{ single_vehicle.hospital_name }}</h3>
+              <ul>
+                <li><strong>Destination</strong>: {{ ride.destination_name }}</li>
+                <li><strong>Distance</strong>: {{ ride.distance_km }} km</li>
+                <li><strong>Ride Duration</strong>:{{ ride.duration_minutes }} minutes</li> 
+                <li><strong>Ride Cost</strong>: KES {{ ride.cost }}</li> 
+                <li><strong>Ride Status</strong>: {{ ride.status }}</li> 
+                <li><strong>Homepage</strong>: <a href="{{ single_hospital.placepageUri }}">click here</a></li>
+              </ul>
+            </div>
+
+          </div>
+  
+          <div class="col-lg-8">
+            <div class="portfolio-info">
+              <h3>You are being driven by {{ride.driver.first_name}}.              </h3>
+              {% if ride.status == 'pending' %}
+              <div class="text-center">
+                <button id="confirmRideBtn" class="btn btn-success px-4 py-2">
+                  Confirm Ride
+                </button>
+              </div>
+              {% endif %}
+  
+            </div>
+          </div>
+  
+          <!-- <div class="col-lg-8"> -->
+  
+          <!-- </div> -->
+  
+        </div>
+  
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  <!-- Confirmation Details Section -->
+  <section id="confirmation-details" class="container mt-4">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-bold mb-4">{{ single_vehicle.vehicle_name }}, {{ single_vehicle.vehicle_plate }}</h2>
+      
+
+
+      <!-- Map Container -->
+      <div class="mb-6">
+        <div id="map" style="height: 400px; width: 100%;" class="rounded-lg"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Map Script -->
+  <script>
+    var map;
+    var startMarker;
+    var endMarker;
+    var directionsRenderer;
+    var previousDirectionsRenderer;
+
+    function initMap() {
+        const startLocation = { 
+            lat: {{ start_latitude }}, 
+            lng: {{ start_longitude }} 
+        };
+        const endLocation = { 
+            lat: {{ end_latitude }}, 
+            lng: {{ end_longitude }} 
+        };
+
+        // Initialize the map centered on the start location
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: startLocation,
+            zoom: 12,
+            heading: 320,
+            tilt: 47.5,
+            mapId: "2ac562d91059ea3d"
+        });
+
+        // Create marker for the start location (green)
+        startMarker = new google.maps.Marker({
+            position: startLocation,
+            map: map,
+            title: 'Start Location',
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        });
+
+        // Create marker for the end location (red)
+        endMarker = new google.maps.Marker({
+            position: endLocation,
+            map: map,
+            title: 'Destination',
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        });
+
+        // Display the route
+        displayRoute(startLocation, endLocation);
+    }
+
+    function displayRoute(start, end) {
+        // Clear previous route if it exists
+        if (previousDirectionsRenderer) {
+            previousDirectionsRenderer.setMap(null);
+        }
+
+        const directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer({
+            map: map,
+            suppressMarkers: true // We'll use our custom markers
+        });
+
+        const request = {
+            origin: start,
+            destination: end,
+            travelMode: 'DRIVING'
+        };
+
+        directionsService.route(request, function(response, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(response);
+                previousDirectionsRenderer = directionsRenderer;
+            } else {
+                console.error('Directions request failed due to ' + status);
+                alert('Could not display route. Please try again.');
+            }
+        });
+    }
+
+    // Handle ride confirmation
+    document.getElementById('confirmRideBtn')?.addEventListener('click', async function() {
+        try {
+            const response = await fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert('Ride confirmed successfully!');
+                window.location.reload();
+            } else {
+                alert('Error confirming ride. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error confirming ride. Please try again.');
+        }
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Initialize the map once the script is loaded
+    function initMapScript() {
+        initMap();
+    }
+</script>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz6PPs-S0jojUFcw7JbhGPdnrmp75F5FE&libraries=places&callback=initMapScript" async defer></script>
+
+</main>
+{% endblock content %}

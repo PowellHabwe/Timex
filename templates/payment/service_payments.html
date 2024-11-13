@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Service Payments</h2>
+    <ul>
+        {% for payment_service in payment_services %}
+            <li>
+                <strong>Hospital:</strong> {{ payment_service.hospital.hospital_name }}<br>
+                <strong>Service:</strong> {{ payment_service.service }}<br>
+                <strong>Payment Method:</strong> {{ payment_service.payment_method }}
+
+                <h3>Provide Service</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="hospital" value="{{ payment_service.hospital.id }}">
+                    <input type="hidden" name="service" value="{{ payment_service.service }}">
+                    <input type="hidden" name="payment_method" value="{{ payment_service.payment_method }}">
+
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </li>
+        {% empty %}
+            <li>No service payments available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,2 @@
+export GOOGLE_MAPS_API_KEY="AIzaSyDz6PPs-S0jojUFcw7JbhGPdnrmp75F5FE"
+export GOOGLE_MAPS_MAP_ID="2ac562d91059ea3d"

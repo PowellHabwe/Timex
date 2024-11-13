@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<main>
+
+    <main style="padding-top: 200px; padding-bottom: 200px;" id="main">
+  
+
+      <!-- ======= About Us Section ======= -->
+      <section id="about" class="about">
+        <div class="container">
+  
+          <div class="section-title" data-aos="fade-up">
+            <h2>Your Active Rides</h2>
+          </div>
+  
+          <div class="row content">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+
+              {% for message in messages %}
+              <p>
+               <strong>Message from the admin: {{message.promotional_message}}</strong> 
+              </p>
+
+              {% endfor %}
+
+              {% if active_ride %}
+
+              <ul>
+                <li>Vehicle Name :<i class="ri-check-double-line"></i>{{ active_ride.vehicle.vehicle_name }}</li>
+                <li>Plate Number :<i class="ri-check-double-line"></i>{{ active_ride.vehicle.vehicle_plate }}</li>
+                <li>Destination :<i class="ri-check-double-line"></i>{{ active_ride.destination_name }}</li>
+                <li>Distance :<i class="ri-check-double-line"></i>{{ active_ride.distance_km }} km</li>
+                <li>Duration :<i class="ri-check-double-line"></i>{{ active_ride.duration_minutes }} minutes</li>
+                <li>Cost :<i class="ri-check-double-line"></i>KES {{ active_ride.cost }}</li>
+                <li>Status :<i class="ri-check-double-line"></i>Ride is <strong>{{ active_ride.status }}</strong> </li>
+
+              </ul>
+
+              {%else%}
+
+              {% endif %}
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
+              <p>
+               Thank you for choosing us.
+              </p>
+
+              <p>
+                You are being driven by <strong> {{active_ride.vehicle.driver.first_name}}.</strong>
+               </p>
+
+              <p>
+                Come Again.
+               </p>
+
+
+            </div>
+          </div>
+  
+        </div>
+      </section><!-- End About Us Section -->
+  
+
+    </main><!-- End #main -->
+  
+</main>
+
+{% endblock content %}

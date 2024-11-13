@@ -1,0 +1,159 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<main>
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+            <h1 data-aos="fade-up">Enabling Mobility</h1>
+            <h2 data-aos="fade-up" data-aos-delay="400">A Smile, Every Mile</h2>
+            <div data-aos="fade-up" data-aos-delay="800">
+              <a href="#about" class="btn-get-started scrollto">Welcome</a>
+            </div>
+          </div>
+          <div style="background-color: #0E3873;border-radius: 25px;" class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+            <img src="{% static 'dabec/img/amb5.png'%}" class="img-fluid animated" alt="">
+          </div>
+        </div>
+      </div>
+  
+    </section><!-- End Hero -->
+  
+    <main id="main">
+  
+
+
+      <!-- ======= F.A.Q Section ======= -->
+      <section id="faq" class="faq">
+        <div class="container">
+  
+          <div class="section-title" data-aos="fade-up">
+            <h2>Frequently Asked Questions</h2>
+          </div>
+  
+          <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-5">
+              <i class="ri-question-line"></i>
+              <h4>How do I book a ride?</h4>
+            </div>
+            <div class="col-lg-7">
+              <p>
+                You can book a ride through our website by selecting your location and destination and choosing from the available vehicle options.
+              </p>
+            </div>
+          </div><!-- End F.A.Q Item-->
+  
+          <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-5">
+              <i class="ri-question-line"></i>
+              <h4>What safety measures are in place for riders and drivers?
+              </h4>
+            </div>
+            <div class="col-lg-7">
+              <p>
+                We have stringent safety protocols, including driver background checks, vehicle inspections, and in-app safety features like real-time tracking and emergency alerts.
+
+              </p>
+            </div>
+          </div><!-- End F.A.Q Item-->
+  
+          <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="500">
+            <div class="col-lg-5">
+              <i class="ri-question-line"></i>
+              <h4>How can I contact support?
+              </h4>
+            </div>
+            <div class="col-lg-7">
+              <p>
+                Our customer support team is available 24/7 through the app, email, or phone to assist with any questions or concerns.
+
+              </p>
+            </div>
+          </div><!-- End F.A.Q Item-->
+  
+        </div>
+      </section><!-- End F.A.Q Section -->
+  
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+  
+          <div class="section-title" data-aos="fade-up">
+            <h2>Contact Us</h2>
+          </div>
+  
+          <div class="row">
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="contact-about">
+                <h3>TimeX</h3>
+                <p>We value your feedback and are here to assist you with any inquiries or support needs. Reach out to us anytime.</p>
+                <div class="social-links">
+                  <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                  <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                  <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                  <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+              <div class="info">
+                <div>
+                  <i class="ri-map-pin-line"></i>
+                  <p>Lorem, ipsum.<br>Nairobi, Kenya</p>
+                </div>
+  
+                <div>
+                  <i class="ri-mail-send-line"></i>
+                  <p>info@example.com</p>
+                </div>
+  
+                <div>
+                  <i class="ri-phone-line"></i>
+                  <p>+254775675675</p>
+                </div>
+  
+              </div>
+            </div>
+  
+            <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
+              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                </div>
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+                <div class="text-center"><button type="submit">Send Message</button></div>
+              </form>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section><!-- End Contact Section -->
+  
+    </main><!-- End #main -->
+  
+
+</main>
+
+
+{% endblock content %}
+

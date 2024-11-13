@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <!-- Add your HTML code for the map container here -->
+    <div id="map"></div>
+
+    <!-- Include the necessary JavaScript libraries for maps and directions -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC33v5bHoBPy12vHUS9wvsz649SWVvP-88&libraries=places"></script>
+    <script>
+        function initializeMap() {
+            var latitude = {{ latitude }};
+            var longitude = {{ longitude }};
+
+            var mapOptions = {
+                zoom: 12,
+                center: {lat: latitude, lng: longitude}
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            var marker = new google.maps.Marker({
+                position: {lat: latitude, lng: longitude},
+                map: map,
+                title: 'Location'
+            });
+        }
+
+        // Call the initializeMap function when the page has loaded
+        google.maps.event.addDomListener(window, 'load', initializeMap);
+    </script>
+</main>
+{% endblock %}

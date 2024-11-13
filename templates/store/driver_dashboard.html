@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Hello: {{ user.username }}</h2>
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li>Driver Dashboard Page</li>
+        </ol>
+      </div>
+
+    </div>
+  </section><!-- End Breadcrumbs -->
+  <section id="portfolio-details" class="portfolio-details">
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+
+
+            <div class="portfolio-info">
+              <h3>Your Vehicle Info:</h3>
+              {% for vehicle in user_vehicles %}
+
+              <ul>
+                <li><strong>Vehicle Name:</strong>:{{ vehicle.vehicle_name }}</li>
+                <li><strong>Vehicle Plate:</strong>: {{ vehicle.vehicle_plate }}</li>
+                <li><strong>Latitude:</strong>:{{  vehicle.latitude }}</li>
+                <li><strong>Longitude:</strong>:{{  vehicle.longitude }}</li>
+                <li><strong>Vehicle Type:</strong>:{{ vehicle.vehicle_type }}</li>
+                <li><strong>Phone Number:</strong>:{{ vehicle.phone_number }}</li>
+                <li><strong>Available:</strong>:{% if vehicle.vehicle_available %} Yes {% else %} No {% endif %}</li>
+              </ul>
+
+              {% empty %}
+              <ul>
+                <li><strong>No vehicles found</strong></li>
+
+              </ul>
+              {% endfor %}
+
+
+            </div>
+
+
+            <div class="portfolio-description">
+              <h2>Your Booked Vehicle:
+              </h2>
+              <ul>
+                {% for vehicle in booked_vehicles %}
+                  <li>
+                    <strong>Vehicle Name:</strong> {{ vehicle.vehicle_name }}<br>
+                    <strong> Is Available:</strong> {% if vehicle.vehicle_available %} Yes {% else %} No {% endif %}<br>
+                  </li>
+
+                  <form method="post" action="{% url 'update_vehicle_status' vehicle.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Mark as Available</button>
+                  </form>
+
+                {% empty %}
+                  <li>No active rides.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="portfolio-info">
+              <h3>Your Active Rides:</h3>
+
+                {% for ride in rides %}
+
+                <p>Driver : {{ ride.driver.username }}</p>
+                <p>Distance : {{ride.distance_km}}km</p>
+                <p>Cost : Ksh{{ride.cost}}</p>
+                <p>Status : {{ride.status}}</p>
+                <p>Start Location Coordinated : ({{ ride.start_latitude }}, {{ ride.start_longitude }})</p>
+                <p>End Location Coordinates : ({{ ride.end_latitude }}, {{ ride.end_longitude }})</p>
+                <p>Start Of Ride Time : {{ ride.ride_time }}</p>
+                <p>End Location Name : {{ride.destination_name}}</p>
+
+                {% if ride.status == 'active' %}
+                <!-- Form to mark the ride as completed -->
+                <form method="post" action="{% url 'mark_ride_completed' ride.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-success">Mark as Completed</button>
+                </form>
+                {% endif %}
+
+
+                {% empty %}
+
+                <p>You dont have any active rides.</p>
+
+                {% endfor %}
+
+
+
+              <h3 style="margin-top: 8px;">Your Scheduled Vehicle Maintenance Appointments:</h3>
+
+
+              {% for maintenance in scheduled_maintenance %}
+                <p>
+                  <strong>Vehicle Name:</strong> {{ maintenance.vehicle.vehicle_name }}<br>
+                  <strong>Maintenance Date:</strong> {{ maintenance.maintenance_date }}<br>
+                  <strong>Description:</strong> {{ maintenance.description }}<br>
+                </p>
+              {% empty %}
+
+                <p>No maintenance scheduled.</p>
+
+              {% endfor %}
+
+
+              <h3>Your Scheduled Vehicle Inspection Appointments:</h3>
+
+
+              {% for inspection in scheduled_inspection %}
+
+              <strong>Vehicle Name:</strong> {{ inspection.vehicle.vehicle_name }}<br>
+              <strong>Maintenance Date:</strong> {{ inspection.inspection_date }}<br>
+              <strong>Description:</strong> {{ inspection.description }}<br>
+              {% empty %}
+                  <p>No inspections scheduled.</p>
+              {% endfor %}
+
+
+
+
+              <!-- ======= Available Services Section ======= -->
+              <h3>Earnings Today:</h3>
+
+              <p>Ksh {{ daily_earnings|floatformat:2 }}</p>  <!-- Formats to 2 decimal places -->
+
+
+
+
+              <h3>Total Earnings:</h3>
+              <p>Ksh {{ total_earnings|floatformat:2 }}</p>  <!-- Formats to 2 decimal places -->
+
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-8"> -->
+
+          <!-- </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+
+  </section><!-- End Portfolio Details Section -->
+</main>
+{% endblock %}

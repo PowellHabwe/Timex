@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plot Distance</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Distance Plot</h1>
+
+    <div id="map"></div>
+
+    <script>
+        // Set the latitude and longitude of the vehicle from Django template variables
+        var vehicleLatLng = { lat: {{ vehicle_latitude }}, lng: {{ vehicle_longitude }} };
+        var userLatLng = { lat: {{ user_latitude }}, lng: {{ user_longitude }} };
+        
+        var userMarker;
+        var vehicleMarker;
+        var map;
+        var previousDirectionsRenderer;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: vehicleLatLng, // Center map on the vehicle's location
+                zoom: 16,
+                heading: 320,
+                tilt: 47.5,
+                mapId: "2ac562d91059ea3d"
+            });
+
+            // Create autocomplete for starting location input field
+            var startingLocationInput = document.getElementById('startingLocation');
+            var autocomplete = new google.maps.places.Autocomplete(startingLocationInput);
+
+            displayRoute();
+        }
+
+        // Function to display the route between the user and vehicle
+        function displayRoute() {
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: true
+            });
+
+            var request = {
+                origin: userLatLng, // User's location
+                destination: vehicleLatLng, // Vehicle's location
+                travelMode: 'DRIVING'
+            };
+
+            directionsService.route(request, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                    createMarkers(response.routes[0].legs[0]);
+                    previousDirectionsRenderer = directionsRenderer;
+                } else {
+                    alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+        // Function to create markers for user and vehicle
+        function createMarkers(routeLeg) {
+            userMarker = new google.maps.Marker({
+                position: userLatLng,
+                map: map,
+                title: 'Your Location',
+                icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' // Red color for user
+            });
+
+            vehicleMarker = new google.maps.Marker({
+                position: vehicleLatLng,
+                map: map,
+                title: 'Vehicle Location',
+                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' // Blue color for vehicle
+            });
+        }
+
+        // Listen for form submission to update starting location
+        document.getElementById('locationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var startingLocation = document.getElementById('startingLocation').value;
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: startingLocation }, function(results, status) {
+                if (status === 'OK' && results[0]) {
+                    var newStartingLatLng = results[0].geometry.location;
+                    updateMap(newStartingLatLng);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        });
+
+        // Function to update the map with a new starting location
+        function updateMap(newStartingLatLng) {
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: true,
+                polylineOptions: { 
+                    strokeColor: 'green',
+                    strokeWeight: 5 
+                }
+            });
+
+            var request = {
+                origin: newStartingLatLng, // Updated starting location
+                destination: vehicleLatLng,
+                travelMode: 'DRIVING'
+            };
+
+            directionsService.route(request, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                    userMarker.setPosition(newStartingLatLng); // Update user marker position
+
+                    // Clear previous route
+                    if (previousDirectionsRenderer) {
+                        previousDirectionsRenderer.setMap(null);
+                    }
+
+                    previousDirectionsRenderer = directionsRenderer;
+                } else {
+                    alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz6PPs-S0jojUFcw7JbhGPdnrmp75F5FE&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>

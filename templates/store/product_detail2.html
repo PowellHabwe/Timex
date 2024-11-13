@@ -1,0 +1,457 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<main>
+
+
+
+
+    <!--
+      - PRODUCT
+    -->
+
+    <div class="product-container">
+
+      <div class="container">
+
+
+        <!--
+          - SIDEBAR
+        -->
+
+        <div class="sidebar  has-scrollbar" data-mobile-menu>
+          <div class="product-showcase">
+
+            <h3 class="showcase-heading">best sellers</h3>
+
+            <div class="showcase-wrapper">
+
+              <div class="showcase-container">
+
+                <div class="showcase">
+
+                  <a href="#" class="showcase-img-box">
+                    <img src="{% static './assets/images/products/gold-1.png'%}" alt="best" width="75" height="75"
+                      class="showcase-img">
+                  </a>
+
+                  <div class="showcase-content">
+
+                    <a href="#">
+                      <h4 class="showcase-title">1 oz Britannia Gold Coin</h4>
+                    </a>
+
+                    <div class="showcase-rating">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                    </div>
+
+                    <div class="price-box">
+                      <p class="price">$450.00</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="showcase">
+
+                  <a href="#" class="showcase-img-box">
+                    <img src="{% static './assets/images/products/gold-2.png'%} " alt="men's hoodies t-shirt" class="showcase-img"
+                      width="75" height="75">
+                  </a>
+
+                  <div class="showcase-content">
+
+                    <a href="#">
+                      <h4 class="showcase-title">Sovereign Elizabeth II Gold Coin | 2022</h4>
+                    </a>
+                    <div class="showcase-rating">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star-half-outline"></ion-icon>
+                    </div>
+
+                    <div class="price-box">
+                      <p class="price">$700.00</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="showcase">
+
+                  <a href="#" class="showcase-img-box">
+                    <img src="{% static './assets/images/products/gbar-1.jpg'%} " alt="100 x 1g CombiBar® " class="showcase-img" width="75"
+                      height="75">
+                  </a>
+
+                  <div class="showcase-content">
+
+                    <a href="#">
+                      <h4 class="showcase-title">100 x 1g CombiBar® </h4>
+                    </a>
+                    <div class="showcase-rating">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star-half-outline"></ion-icon>
+                    </div>
+
+                    <div class="price-box">
+                      <p class="price">$3000.00</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="showcase">
+
+                  <a href="#" class="showcase-img-box">
+                    <img src="{% static './assets/images/products/scoin-1.png'%} " alt="1 Kilo Silver Bar" class="showcase-img" width="75"
+                      height="75">
+                  </a>
+
+                  <div class="showcase-content">
+
+                    <a href="#">
+                      <h4 class="showcase-title">1 Kilo Silver Bar </h4>
+                    </a>
+                    <div class="showcase-rating">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                    </div>
+
+                    <div class="price-box">
+                      <p class="price">$12.00</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="single-product" style="margin-top: 8px;width: 1080px;position: relative">
+          <div class="row" style="       display: flex;gap: 20px;">
+              <div class="col-6" style="width: 50%;">
+                  <div class="product-image">
+                      <div class="product-image-main">
+                          <img src="{{ single_product.image.url }}" alt="" id="product-main-image">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6">
+                  <div class="breadcrumb">
+                      <span><a href="#">Home</a></span>
+                      <span><a href="#">Product</a></span>
+                      <span class="active">T-shirt</span>
+                  </div>
+
+                  <div class="product">
+                      <div class="product-title">
+                          <h2>Half Sleve T-shirt for Men</h2>
+                      </div>
+                      <div class="product-rating">
+                          <span><i class="bx bxs-star"></i></span>
+                          <span><i class="bx bxs-star"></i></span>
+                          <span><i class="bx bxs-star"></i></span>
+                          <span><i class="bx bxs-star"></i></span>
+                          <span><i class="bx bxs-star"></i></span>
+                          <span class="review">(47 Review)</span>
+                      </div>
+                      <div class="product-price">
+                          <span class="offer-price">$99.00</span>
+                          <span class="sale-price">$129.00</span>
+                      </div>
+
+                      <div class="product-details">
+                          <h3>Description</h3>
+                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos est magnam quibusdam maiores sit perferendis minima cupiditate iusto earum repudiandae maxime vitae nostrum, ea cumque iste ipsa hic commodi tempore.</p>
+                      </div>
+                      <span class="divider"></span>
+
+                      <div class="product-btn-group">
+                          <div class="button add-cart"><i class='bx bxs-cart' ></i> Add to Cart</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+{% endblock content %}
+
+
+
+    {% comment %} <div class="container mt-5 mb-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card" style="border:none">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="images p-3">
+                                <div class="text-center p-4"> <img id="main-image" src="{% static './assets/images/products/silver10.jpg'%}" width="250" /> </div>
+                                <div class="thumbnail text-center"> <img onclick="change_image(this)" src="{% static './assets/images/products/silver10.jpg'%}" width="70"> <img onclick="change_image(this)" src="https://i.imgur.com/Dhebu4F.jpg" width="70"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product p-4" style="background-color: #eee">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                                </div>
+                                <div class="mt-4 mb-3"> <span style="font-size: 13px" class="text-uppercase text-muted brand">Orianz</span>
+                                    <h5 class="text-uppercase">Men's slim fit t-shirt</h5>
+                                    <div class="price d-flex flex-row align-items-center"> <span style="color:red;font-weight: 700" class="act-price">$20</span>
+                                        <div class="ml-2"> <small style="text-decoration: line-through" class="dis-price">$59</small> <span>40% OFF</span> </div>
+                                    </div>
+                                </div>
+                                <p class="about" style="font-size: 14px">Shop from a wide range of t-shirt from orianz. Pefect for your everyday use, you could pair it with a stylish pair of jeans or trousers complete the look.</p>
+                                <div class="sizes mt-5">
+                                    <h6 class="text-uppercase">Size</h6> <label style="cursor: pointer" class="radio"> <input style="position: absolute;top: 0;left: 0;visibility: hidden;pointer-events: none" type="radio" name="size" value="S" checked> <span style="padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase">S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span style="padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase">M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span style="padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase">L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span style="padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase">XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span style="padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase">XXL</span> </label>
+                                </div>
+                                <div class="cart mt-4 align-items-center"> <button style="background-color: #ff0000;border-color: #ff0000" class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i style="margin-right: 10px" class="fa fa-heart text-muted"></i> <i style="margin-right: 10px" class="fa fa-share-alt text-muted"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    {% comment %} <div class="container" style="display: flex;position: relative; align-items: center; justify-content: center; height: 100vh;">
+        <div class="single-product" style="width: 1080px; position: relative;">
+            <div class="row" style="display: flex; gap: 20px;">
+                <div class="col-6" style=" width: 50%;">
+                    <div class="product-image" style="width: 100%;">
+                        <div class="product-image-main" style="position: relative;
+                        display: block;
+                        height: 480px;
+                        background: var(--bg-grey);
+                        padding: 10px;">
+                            <img style="    display: block;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain" src="img/tshirt-1.png" alt="" id="product-main-image">
+                        </div>
+                        <div style="    display: flex;
+                        gap: 10px;
+                        margin: 10px 0;" class="product-image-slider">
+                            <img style="    width: 90px;
+                            height: 90px;
+                            background: var(--bg-grey);
+                            padding: 6px;
+                            cursor: pointer;" src="img/tshirt-1.png" alt=""  class="image-list">
+                            <img style="    width: 90px;
+                            height: 90px;
+                            background: var(--bg-grey);
+                            padding: 6px;
+                            cursor: pointer;" src="img/tshirt-2.png" alt=""  class="image-list">
+                            <img style="    width: 90px;
+                            height: 90px;
+                            background: var(--bg-grey);
+                            padding: 6px;
+                            cursor: pointer;" src="img/tshirt-3.png" alt=""  class="image-list">
+                            <img style="    width: 90px;
+                            height: 90px;
+                            background: var(--bg-grey);
+                            padding: 6px;
+                            cursor: pointer;" src="img/tshirt-group.png" alt=""  class="image-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+    
+                    <div class="product">
+                        <div class="product-title" style="margin-top: 20px;">
+                            <h2 style="    font-size: 32px;
+                            line-height: 2.4rem;
+                            font-weight: 700;
+                            letter-spacing: -0.02rem;">Half Sleve T-shirt for Men</h2>
+                        </div>
+                        <div style="    display: flex;
+                        margin-top: 4px;
+                        margin-bottom: 10px;
+                        align-items: center;" class="product-rating">
+                            <span><i class="bx bxs-star"></i></span>
+                            <span><i class="bx bxs-star"></i></span>
+                            <span><i class="bx bxs-star"></i></span>
+                            <span><i class="bx bxs-star"></i></span>
+                            <span><i class="bx bxs-star"></i></span>
+                            <span style="    font-size: 12px;
+                            font-weight: 500;" class="review">(47 Review)</span>
+                        </div>
+                        <div style="    display: flex;
+                        position: relative;
+                        margin: 10px 0;
+                        align-items: center;" class="product-price">
+                            <span style="    font-size: 48px;
+                            font-weight: 700;" class="offer-price">$99.00</span>
+                            <span style="    font-size: 22px;
+                            font-weight: 500;
+                            text-decoration: line-through;
+                            color: grey;
+                            margin-left: 12px;" class="sale-price">$129.00</span>
+                        </div>
+    
+                        <div style=" margin: 10px 0;" class="product-details">
+                            <h3 style="    font-size: 18px;
+                            font-weight: 500;">Description</h3>
+                            <p style="    margin: 5px 0;
+                            font-size: 14px;
+                            line-height: 1.2rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos est magnam quibusdam maiores sit perferendis minima cupiditate iusto earum repudiandae maxime vitae nostrum, ea cumque iste ipsa hic commodi tempore.</p>
+                        </div>
+                        <div style="    margin: 10px 0;" class="product-size">
+                            <h4 style="    font-size: 16px;
+                            font-weight: 500;">Size</h4>
+                            <div style="    margin: 5px 0;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 10px;
+                            cursor: pointer;" class="size-layout">
+                                <input style=" display: none;" type="radio" name="size" value="S" id="1" class="size-input">
+                                <label style="    background: var(--bg-grey);
+                                padding: 10px 18px;
+                                border: 1px solid #efefef;
+                                border-radius: 4px;
+                                margin-left: 0px;
+                                font-size: 16px;
+                                font-weight: 700;
+                                cursor: pointer;" for="1" class="size">S</label>
+    
+                                <input style=" display: none;" type="radio" name="size" value="M" id="2" class="size-input">
+                                <label style="    background: var(--bg-grey);
+                                padding: 10px 18px;
+                                border: 1px solid #efefef;
+                                border-radius: 4px;
+                                margin-left: 0px;
+                                font-size: 16px;
+                                font-weight: 700;
+                                cursor: pointer;" for="2" class="size">M</label>
+    
+                                <input style=" display: none;" type="radio" name="size" value="L" id="3" class="size-input">
+                                <label style="    background: var(--bg-grey);
+                                padding: 10px 18px;
+                                border: 1px solid #efefef;
+                                border-radius: 4px;
+                                margin-left: 0px;
+                                font-size: 16px;
+                                font-weight: 700;
+                                cursor: pointer;" for="3" class="size">L</label>
+    
+                                <input style=" display: none;" type="radio" name="size" value="XL" id="4" class="size-input">
+                                <label style="    background: var(--bg-grey);
+                                padding: 10px 18px;
+                                border: 1px solid #efefef;
+                                border-radius: 4px;
+                                margin-left: 0px;
+                                font-size: 16px;
+                                font-weight: 700;
+                                cursor: pointer;" for="4" class="size">XL</label>
+    
+                                <input style=" display: none;" type="radio" name="size" value="XXL" id="5" class="size-input">
+                                <label style="    background: var(--bg-grey);
+                                padding: 10px 18px;
+                                border: 1px solid #efefef;
+                                border-radius: 4px;
+                                margin-left: 0px;
+                                font-size: 16px;
+                                font-weight: 700;
+                                cursor: pointer;" for="5" class="size">XXL</label>
+                            </div>
+                        </div>
+                        <div style="    margin: 10px 0;
+                        justify-content: center;" class="product-color">
+                            <h4 style="    font-size: 16px;
+                            font-weight: 500;">Color</h4>
+                            <div style="    margin: 5px 0;
+                            display: flex;
+                            gap: 10px;" class="color-layout">
+                                <input style="display: none;" type="radio" name="color"  value="black" class="color-input">
+                                <label style="    border-radius: 4px;
+                                cursor: pointer;
+                                content: '';
+                                width: 40px;
+                                height: 40px;
+                                background-color: black;
+                                display: inline-block;" for="black" class="black"></label>
+                                <input  style="display: none;" type="radio" name="color"  value="red" class="color-input">
+                                <label style="    border-radius: 4px;
+                                cursor: pointer;
+                                content: '';
+                                width: 40px;
+                                height: 40px;
+                                background-color: red;
+                                display: inline-block;" for="red" class="red"></label>
+    
+                                <input  style="display: none;" type="radio" name="color"  value="blue" class="color-input">
+                                <label style="    border-radius: 4px;
+                                cursor: pointer;
+                                content: '';
+                                width: 40px;
+                                height: 40px;
+                                background-color: blue;
+                                display: inline-block;" for="blue" class="blue"></label>
+                            </div>
+                        </div>
+                        <span style="display: block;
+                        height: 1px;
+                        width: 100%;
+                        background: #48484830;
+                        margin: 20px 0;" class="divider"></span>
+    
+                        <div style="    display: flex;
+                        gap: 15px;" class="product-btn-group">
+                            <div style="    display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 4px;
+                            padding: 10px 24px;
+                            font-size: 16px;
+                            font-weight: 500;
+                            background-color: #5344db;
+                            color: #fff;
+                            border: 1px solid #5344db;
+                            border-radius: 4px;
+                            cursor: pointer;" class="button buy-now"><i style="font-size: 20px;" class='bx bxs-zap' ></i> Buy Now</div>
+                            <div style="    display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 4px;
+                            padding: 10px 24px;
+                            font-size: 16px;
+                            font-weight: 500;
+                            background-color: #efefef;
+                            color:#484848;
+                            border-radius: 4px;
+                            cursor: pointer;" class="button add-cart"><i style="font-size: 20px;" class='bx bxs-cart' ></i> Add to Cart</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  {% endcomment %}
