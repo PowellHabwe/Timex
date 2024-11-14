@@ -102,21 +102,6 @@ DATABASES = {
     }
 }
 
-CACHE_TTL = 60 * 60 * 20  # 20 hours
-
-if DEFAULT_TIMEOUT is None:
-    DEFAULT_TIMEOUT = CACHE_TTL
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        },
-        "KEY_PREFIX": "example"
-    }
-}
 
 
 

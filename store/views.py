@@ -98,6 +98,7 @@ def location(request):
 
 @csrf_exempt
 def display_nearest_vehicles(request):
+    # Get user's location from IP
     ip = requests.get('https://api.ipify.org?format=json')
     ip_data = json.loads(ip.text)
     res = requests.get('http://ip-api.com/json/' + ip_data["ip"])
@@ -106,7 +107,6 @@ def display_nearest_vehicles(request):
 
     latitude = location_data['lat']
     longitude = location_data['lon']
-
 
     print("Received latitude:", latitude)
     print("Received longitude:", longitude)
@@ -123,14 +123,16 @@ def display_nearest_vehicles(request):
         except ValueError:
             continue
 
+        # Skip duplicate coordinates
         if (vehicle_latitude, vehicle_longitude) in processed_coordinates:
             continue
 
+        # Calculate distance and cost
         coordinate1 = (latitude, longitude)
         coordinate2 = (vehicle_latitude, vehicle_longitude)
         distance_meters = geodesic(coordinate1, coordinate2).meters
-        distance_km = distance_meters / 1000  # Convert meters to kilometers
-        ride_cost = distance_km * 50  # Calculate cost at 50 shillings per kilometer
+        distance_km = distance_meters / 1000
+        ride_cost = distance_km * 50
 
         vehicle_data = {
             'name': vehicle.vehicle_name,
@@ -138,19 +140,22 @@ def display_nearest_vehicles(request):
             'longitude': vehicle_longitude,
             'user_latitude': latitude,
             'user_longitude': longitude,
-            'distance_km': round(distance_km, 2),  # Round for readability
-            'ride_cost': round(ride_cost, 2),  # Round for readability
+            'distance_km': round(distance_km, 2),
+            'ride_cost': round(ride_cost, 2),
         }
         nearby_vehicles.append(vehicle_data)
         processed_coordinates.add((vehicle_latitude, vehicle_longitude))
 
+    # Sort and get nearest 70 vehicles
     nearby_vehicles.sort(key=lambda x: x['distance_km'])
     nearest_vehicles = nearby_vehicles[:70]
 
+    # Get driving distances using Google Maps API
     gmaps = googlemaps.Client(key='AIzaSyDz6PPs-S0jojUFcw7JbhGPdnrmp75F5FE')
     origins = [(latitude, longitude)]
     destinations = [(vehicle['latitude'], vehicle['longitude']) for vehicle in nearest_vehicles]
 
+    # Process in batches of 25 to respect API limits
     batch_size = 25
     batches = [destinations[i:i + batch_size] for i in range(0, len(destinations), batch_size)]
     distances = []
@@ -163,38 +168,15 @@ def display_nearest_vehicles(request):
                 duration = round(element['duration']['value'] / 60)
                 distances.append({'distance': distance, 'duration': duration})
 
+    # Update vehicles with Google Maps distance data
     for i, vehicle in enumerate(nearest_vehicles):
         vehicle.update(distances[i])
 
+    # Get final 20 nearest vehicles
     nearest_vehicles.sort(key=lambda x: x['distance_km'])
     twenty_nearest_vehicles = nearest_vehicles[:20]
 
-    cached_vehicles = []
-    for i, vehicle in enumerate(twenty_nearest_vehicles):
-        cache_key = f'vehicle_{i}'
-        vehicle['ride_cost'] = round(vehicle['distance_km'] * 50, 2)  # Ensure cost is added to cache
-
-        # Attempt to cache the vehicle data
-        success = cache.set(cache_key, vehicle, timeout=24*60*60)
-
-        # Check if the cache was set successfully
-        if success:
-            print(f"Cache set successfully for key: {cache_key}")
-        else:
-            print(f"Cache set failed for key: {cache_key}")
-
-        # Verify by retrieving it immediately
-        cached_vehicle = cache.get(cache_key)
-        if cached_vehicle:
-            print(f"Cache retrieval successful for key: {cache_key}")
-        else:
-            print(f"Cache retrieval failed for key: {cache_key}")
-
-        cached_vehicles.append(vehicle)
-
-    return render(request, 'store/display_nearest_vehicles.html', {'cached_vehicles': cached_vehicles})
-
-
+    return render(request, 'store/display_nearest_vehicles.html', {'vehicles': twenty_nearest_vehicles})
 @login_required
 def plot_distance(request, vehicle_latitude, vehicle_longitude, user_latitude, user_longitude):
     context = {

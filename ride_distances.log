@@ -3304,3 +3304,18 @@ Traceback (most recent call last):
   File "/home/powell/Projects/Afya-main/Afya-main/env/lib/python3.10/site-packages/django/template/base.py", line 662, in __init__
     raise TemplateSyntaxError("Could not parse the remainder: '%s' "
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '&' from '&'
+2024-11-14 12:01:22,175 - WARNING - Not Found: /favicon.ico
+2024-11-14 12:01:26,730 - INFO - API queries_quota: 60
+2024-11-14 12:01:38,745 - INFO - API queries_quota: 60
+2024-11-14 12:01:45,092 - INFO - API queries_quota: 60
+2024-11-14 12:01:56,471 - INFO - API queries_quota: 60
+2024-11-14 12:01:57,633 - INFO - API queries_quota: 60
+2024-11-14 12:02:01,682 - INFO - API queries_quota: 60
+2024-11-14 12:02:08,026 - INFO - Successfully got current location: (-1.2085711, 36.9003409)
+2024-11-14 12:04:05,119 - INFO - /home/powell/Projects/Afya-main/Afya-main/store/views.py changed, reloading.
+2024-11-14 12:05:21,609 - INFO - API queries_quota: 60
+2024-11-14 12:05:29,592 - INFO - API queries_quota: 60
+2024-11-14 12:06:10,143 - INFO - API queries_quota: 60
+2024-11-14 12:06:14,149 - INFO - Successfully got current location: (-1.2085711, 36.9003409)
+2024-11-14 12:07:00,759 - INFO - /home/powell/Projects/Afya-main/Afya-main/dabec/settings.py changed, reloading.
+2024-11-14 12:07:08,155 - INFO - Successfully got current location: (-1.2085711, 36.9003409)
